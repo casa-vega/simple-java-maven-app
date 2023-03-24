@@ -31,7 +31,7 @@ jobs:
 
       - name: Validate Maven wrapper
         run: |
-          ./mvn --version
+          mvn --version
           echo "M2_HOME=${JAVA_HOME}" >> $GITHUB_ENV
 
       - name: Build and Test with Maven
