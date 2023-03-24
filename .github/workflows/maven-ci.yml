@@ -35,14 +35,14 @@ jobs:
           echo "M2_HOME=${JAVA_HOME}" >> $GITHUB_ENV
 
       - name: Build and Test with Maven
-        run: ./mvnw clean install
+        run: mvn clean install
 
       - name: Deploy snapshots and tag release on main branch
         if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         run: |
           VERSION=$(./mvnw -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
           if [[ $VERSION == *"-SNAPSHOT" ]]; then
-            ./mvn deploy
+            mvn deploy
           else
             git config user.name "GitHub Actions"
             git config user.email "github-actions@users.noreply.github.com"
