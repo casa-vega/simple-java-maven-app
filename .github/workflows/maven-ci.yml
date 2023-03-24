@@ -31,7 +31,7 @@ jobs:
 
       - name: Validate Maven wrapper
         run: |
-          ./mvnw --version
+          ./mvn --version
           echo "M2_HOME=${JAVA_HOME}" >> $GITHUB_ENV
 
       - name: Build and Test with Maven
@@ -42,7 +42,7 @@ jobs:
         run: |
           VERSION=$(./mvnw -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
           if [[ $VERSION == *"-SNAPSHOT" ]]; then
-            ./mvnw deploy
+            ./mvn deploy
           else
             git config user.name "GitHub Actions"
             git config user.email "github-actions@users.noreply.github.com"
